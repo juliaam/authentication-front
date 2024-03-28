@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import Main from './components/main.vue'
+import Register from './components/Register.vue'
 </script>
 
 <template>
-    <Main/>
+    <Register/>
 </template>
 
 <style scoped>

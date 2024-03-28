@@ -1,0 +1,29 @@
+$from320: 20em;
+$from360: 22.5em;
+$from667: 41.6875em;
+$from1024: 64em;
+
+@mixin from320 {
+  @media (min-width: $from320) {
+    @content;
+  }
+}
+
+@mixin from360 {
+  @media (min-width: $from360) {
+    @content;
+  }
+}
+
+@mixin from667 {
+  @media (min-width: $from667) {
+    @content;
+  }
+}
+
+@mixin from1024 {
+  @media (min-width: $from1024) {
+    @content;
+  }
+}
+
