@@ -15,7 +15,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-
+  box-sizing: border-box;
   font-size: 62.5%;
 }
 
@@ -25,14 +25,11 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-
   font-size: 1.6rem;
 }
 
 #app {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
 }
 
