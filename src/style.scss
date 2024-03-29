@@ -1,5 +1,6 @@
-@use './styles/colors.scss' as colors;
-@use './styles/fonts.scss' as fonts;
+@use "./styles/colors.scss" as colors;
+@use "./styles/fonts.scss" as fonts;
+@use "./styles/breakpoints.scss" as breakpoints;
 
 :root {
   font-family: fonts.$mainFont;
@@ -8,7 +9,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: colors.$mainBackground;
+  background-color: white;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -19,17 +20,26 @@
   font-size: 62.5%;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-  font-size: 1.6rem;
+@media (max-width: 64em) {
+  #app {
+    min-width: 320px;
+    min-height: 100vh;
+    background-color: white;
+  }
 }
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-}
+@include breakpoints.from1024 {
+  body {
+    margin: 0;
+    display: flex;
+    place-items: center;
+    min-height: 100vh;
+    font-size: 1.6rem;
+    background-color: colors.$mainBackground;
+  }
 
+  #app {
+    margin: auto;
+    background-color: colors.$mainBackground;
+  }
+}

@@ -1,29 +1,39 @@
 <script setup lang="ts">
-import { watch, ref } from "vue";
+import { ref } from "vue";
 import facebook from "./img/facebookIcon.svg";
 import google from "./img/googleIcon.svg";
+import loginIllustration from "./img/loginIllustration.svg";
+import icon from "./img/keyIcon.svg";
 
-const $nameInput = ref(null);
-const $emailInput = ref(null);
-const $passwordInput = ref(null);
+const $nameLabel = ref(null);
+const $emailLabel = ref(null);
+const $passwordLabel = ref(null);
 
 const formRegister = ref({
-  name: { value: "", ref: "$nameInput" },
-  email: { value: "", ref: "$emailInput" },
-  password: { value: "", ref: "$passwordInput" }
+  name: { value: "", isFocusing: false },
+  email: { value: "", isFocusing: false },
+  password: { value: "", isFocusing: false },
 });
 
-watch(
-  () => [$nameInput, $emailInput, $passwordInput],
-  () => {
-    console.log(formRegister.value.name);
-  },
-  { deep: true }
-);
+const activeLabel = (
+  elementRef: any,
+  value: { value: string; isFocusing: boolean }
+) => {
+  elementRef.classList.add("label--active");
+  value.isFocusing = true;
+};
 </script>
 
 <template>
   <div class="container-register">
+    <div class="container-register__out">
+      <img :src="icon" class="container-register__img-key" alt="key icon" />
+      <img
+        :src="loginIllustration"
+        class="container-register__img-illustration"
+        alt="login illustration"
+      />
+    </div>
     <div class="container-register__in">
       <div class="container-register__in--content">
         <h2 class="container-register__title">Criar conta</h2>
@@ -46,30 +56,37 @@ watch(
           </div>
         </div>
         <div class="container-register__input-group">
-          <label class="container-register__label" for="name"
-            >Nome Completo</label
+          <label class="container-register__label" for="name" ref="$nameLabel"
+            >Nome Completo
+          </label>
+          <input
+            @focus="activeLabel($nameLabel, formRegister.name)"
+            v-model="formRegister.name.value"
+            class="container-register__input"
+            :placeholder="formRegister.name.isFocusing ? '' : 'Nome completo'"
+          />
+          <label class="container-register__label" for="email" ref="$emailLabel"
+            >E-mail</label
           >
           <input
-            ref="$nameInput"
-            v-model="formRegister.email.value"
-            class="container-register__input"
-            placeholder="Nome Completo"
-          />
-          <label class="container-register__label" for="email">E-mail</label>
-          <input
-            ref="$emailInput"
+            @focus="activeLabel($emailLabel, formRegister.email)"
             v-model="formRegister.email.value"
             name="email"
             class="container-register__input"
-            placeholder="E-mail"
+            :placeholder="formRegister.email.isFocusing ? '' : 'E-mail'"
           />
-          <label class="container-register__label" for="password">Senha</label>
+          <label
+            class="container-register__label"
+            for="password"
+            ref="$passwordLabel"
+            >Senha</label
+          >
           <input
-            ref="$passwordInput"
+            @focus="activeLabel($passwordLabel, formRegister.password)"
             v-model="formRegister.password.value"
             name="password"
             class="container-register__input"
-            placeholder="Senha"
+            :placeholder="formRegister.password.isFocusing ? '' : 'Senha'"
           />
         </div>
         <button class="container-register__button">Criar conta</button>
@@ -85,32 +102,38 @@ watch(
 <style lang="scss">
 @use "/src/styles/colors.scss" as colors;
 @use "/src/styles/fonts.scss" as fonts;
+@use "/src/styles/breakpoints.scss" as breakpoints;
 
 .container-register {
-  min-width: 95rem;
-  height: 60rem;
-
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
 
-  border: 0.3rem rgb(239, 238, 238) solid;
-  border-radius: 3rem;
+  &__out {
+    display: none;
+  }
 
   &__in {
-    width: 60%;
     height: 100%;
     border-radius: 2rem;
     background-color: white;
-    margin-left: auto;
 
     &--content {
       display: flex;
       flex-direction: column;
-      color: colors.$gray;
-      margin: 8rem 10rem auto 10rem;
+      color: colors.$lightGray;
+      margin: 2rem;
     }
   }
+
+  &__img-key {
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+    width: 36px;
+    height: 36px;
+  }
+
   &__title {
     color: black;
   }
@@ -125,35 +148,30 @@ watch(
     justify-content: space-evenly;
     display: flex;
     align-items: center;
-    border: 1px solid colors.$gray;
+    border: 1px solid colors.$lightGray;
     border-radius: 0.7rem;
     width: 48%;
     padding-top: 0.3rem;
     padding-bottom: 0.3rem;
-  
     cursor: pointer;
-
     font-size: 1.2rem;
-
-    &--text {
-      margin-left: 0.5rem;
-    }
+    font-weight: fonts.$bold;
+    color: colors.$gray;
   }
 
   &__button {
     min-width: 100%;
     height: 4rem;
-    margin-top: 1rem;
     background-color: rgba(74, 18, 161, 255);
     color: whitesmoke;
     border: none;
     border-radius: 0.5rem;
+    margin-top: 80%;
 
     font-size: 1.6rem;
     line-height: 2.4rem;
     font-weight: fonts.$semiBold;
     font-family: fonts.$mainFont;
-
     cursor: pointer;
   }
 
@@ -162,27 +180,44 @@ watch(
     height: 35px;
   }
 
+  &__label {
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.5s;
+
+    color: rgb(104, 101, 101);
+    font-weight: fonts.$normal;
+  }
+
+  .label--active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   &__input {
     min-width: 100%;
     background-color: transparent;
     border: none;
-    border-bottom: 0.05rem solid colors.$gray;
+    border-bottom: 0.05rem solid colors.$lightGray;
     box-sizing: border-box;
-    margin-bottom: 1rem;
+    margin-bottom: 1.4rem;
 
+    font-weight: fonts.$normal;
     font-family: fonts.$mainFont;
     font-size: 1.7rem;
-    color: rgb(56, 55, 55);
+    color: colors.$gray;
   }
   &__input:focus {
     outline: none;
-    color: rgb(59, 59, 59);
   }
 
   &__bottom {
     display: flex;
   }
   &__text {
+    color: colors.$gray;
     &--clickable {
       color: rgba(74, 18, 161, 255);
       margin-left: 0.7rem;
@@ -190,13 +225,53 @@ watch(
       cursor: pointer;
     }
   }
-  &__label {
-    opacity: 0;
-    transition: opacity 0.3s ease;
+}
+
+@include breakpoints.from360 {
+  .container-register {
+    &__in {
+      &--content {
+        margin: 4rem 5rem auto 5rem;
+      }
+    }
+    &__button {
+      margin-top: 45%;
+    }
+    
   }
-  &__label {
-    &--active {
-      opacity: 1;
+}
+
+@include breakpoints.from667 {
+  .container-register {
+    &__button {
+      margin-top: 30%;
+    }
+  }
+}
+
+@include breakpoints.from1024 {
+  .container-register {
+    min-width: 95rem;
+    height: 60rem;
+    border: 0.3rem rgb(239, 238, 238) solid;
+    border-radius: 3rem;
+
+    &__out {
+      min-width: 40%;
+      height: 100%;
+      display: block !important;
+    }
+    &--content {
+      display: flex;
+      flex-direction: column;
+      color: colors.$lightGray;
+      margin: 8rem 10rem auto 10rem;
+    }
+    &__in {
+      height: 100%;
+    }
+    &__button {
+      margin-top: 3rem;
     }
   }
 }
