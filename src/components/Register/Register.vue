@@ -3,12 +3,22 @@ import google from "./img/googleIcon.svg";
 import loginIllustration from "./img/loginIllustration.svg";
 import icon from "./img/keyIcon.svg";
 import Card from "./Card.vue";
-import Input from "../Input.vue";
+import Input from "../InputText.vue";
+import { ref } from "vue";
+import { User } from "../../types/User";
+import { useUserStore } from "../../stores/user";
 
-const form = {
+const userStore = useUserStore();
+
+const form = ref({
   name: "",
   email: "",
   password: "",
+});
+
+const createAccount = (accountBody: User): void => {
+  userStore.user = accountBody;
+  userStore.register();
 };
 </script>
 
@@ -39,12 +49,14 @@ const form = {
             v-model="form.name"
             placeholder="Nome"
             style="margin-top: 1rem"
+            id="name"
           />
           <Input
             label="Email"
             v-model="form.email"
             placeholder="Email"
             style="margin-top: 1rem"
+            id="email"
           />
 
           <Input
@@ -52,9 +64,13 @@ const form = {
             v-model="form.password"
             placeholder="Senha"
             style="margin-top: 1rem"
+            id="password"
+            type="password"
           />
         </div>
-        <button class="container-register__button">Criar conta</button>
+        <button class="container-register__button" @click="createAccount(form)">
+          Criar conta
+        </button>
         <div class="container-register__bottom">
           <p class="container-register__text">Já tem uma conta?</p>
           <p class="container-register__text--clickable">Acessar</p>
@@ -123,22 +139,6 @@ const form = {
     font-weight: fonts.$semiBold;
     font-family: fonts.$mainFont;
     cursor: pointer;
-  }
-
-  &__label {
-    margin-bottom: 0.5rem;
-    display: inline-block;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.3s ease, transform 0.5s;
-
-    color: rgb(104, 101, 101);
-    font-weight: fonts.$normal;
-  }
-
-  .label--active {
-    opacity: 1;
-    transform: translateY(0);
   }
 
   &__bottom {

@@ -4,14 +4,16 @@ import { UserService } from "../services/user";
 
 export const useUserStore = defineStore("user", {
   state: () => ({
-    name: "",
-    email: "",
-    password: "",
+    user: {
+      name: "",
+      email: "",
+      password: "",
+    } as User,
   }),
   getters: {},
   actions: {
-    register(body: User) {
-      return UserService.register(body);
+    register() {
+      return UserService.register(this.user);
     },
   },
 });
