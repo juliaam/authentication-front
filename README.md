@@ -1,7 +1,7 @@
 
 # Cadastro - FrontEnd (em andamento)
 
-Projeto no qual é possível fazer o cadastro e login por email, google ou facebook, com confirmação de email.
+Projeto no qual é possível fazer o cadastro e login por email ou google, com confirmação de email.
 
 
 
