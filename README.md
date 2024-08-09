@@ -4,14 +4,9 @@
 Projeto no qual é possível fazer o cadastro e login por email ou google, com confirmação de email.
 
 
-
-
 ## Stack utilizada
 
 **Front-end:** VueJs , scss e Pinia 🍍.
-
-
-
 
 
 ## Demonstração
