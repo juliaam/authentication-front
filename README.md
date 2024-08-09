@@ -1,15 +1,13 @@
+# Registration - Frontend (In Progress)
 
-# Cadastro - FrontEnd (em andamento)
+This project allows users to register and log in using email or Google, with email confirmation required.
 
-Projeto no qual é possível fazer o cadastro e login por email ou google, com confirmação de email.
+## Tech Stack
 
+**Front-end:** VueJs, SCSS, and Pinia 🍍.
 
-## Stack utilizada
-
-**Front-end:** VueJs , scss e Pinia 🍍.
-
-
-## Demonstração
+## Demo
 
 ![image](https://github.com/juliaam/projeto-cadastro-front/assets/35346206/28e71d13-ea9d-4231-94f1-831d60df8232)
 
+---
