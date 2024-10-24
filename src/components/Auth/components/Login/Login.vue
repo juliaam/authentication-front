@@ -1,32 +1,14 @@
 <script setup lang="ts">
-import google from "./img/googleIcon.svg";
-import loginIllustration from "./img/loginIllustration.svg";
-import icon from "./img/keyIcon.svg";
-import Card from "./components/Card.vue";
-import Input from "../InputText/InputText.vue";
-import { ref } from "vue";
-import { User } from "../../types/User";
-import { useUserStore } from "../../stores/user";
-import MainContent from "../MainContent/MainContent.vue";
-
-const userStore = useUserStore();
-
-const form = ref({
-  name: "",
-  email: "",
-  password: "",
-});
-
-const createAccount = (accountBody: User): void => {
-  userStore.user = accountBody;
-  userStore.register();
-};
+import MainContent from "../../../MainContent/MainContent.vue";
+import keyIcon from "../../img/keyIcon.svg";
+import loginIllustration from "../../img/loginIllustration.svg";
+import googleIcon from "../../img/googleIcon.svg";
 </script>
 
 <template>
   <MainContent>
     <template #register-out>
-      <img :src="icon" class="container-register__img-key" alt="key icon" />
+      <img :src="keyIcon" class="container-register__img-key" alt="key icon" />
       <img
         :src="loginIllustration"
         class="container-register__img-illustration"
@@ -35,26 +17,24 @@ const createAccount = (accountBody: User): void => {
     </template>
     <template #register-in>
       <div class="container-register__in--content">
-        <h2 class="container-register__title">Criar conta</h2>
+        <h2 class="container-register__title">Entrar</h2>
         <div class="container-register__card-group">
           <Card
             :style="{ width: '100%' }"
-            :src="google"
+            :src="googleIcon"
             alt="Google Icon"
-            text="Registrar com google"
+            text="Entrar com google"
           />
         </div>
         <div class="container-register__input-group">
           <Input
             label="Nome"
-            v-model="form.name"
             placeholder="Nome"
             style="margin-top: 1rem"
             id="name"
           />
           <Input
             label="Email"
-            v-model="form.email"
             placeholder="Email"
             style="margin-top: 1rem"
             id="email"
@@ -62,19 +42,16 @@ const createAccount = (accountBody: User): void => {
 
           <Input
             label="Senha"
-            v-model="form.password"
             placeholder="Senha"
             style="margin-top: 1rem"
             id="password"
             type="password"
           />
         </div>
-        <button class="container-register__button" @click="createAccount(form)">
-          Criar conta
-        </button>
+        <button class="container-register__button">Entrar</button>
         <div class="container-register__bottom">
-          <p class="container-register__text">Já tem uma conta?</p>
-          <p class="container-register__text--clickable">Acessar</p>
+          <p class="container-register__text">Não possui uma conta?</p>
+          <p class="container-register__text--clickable">Criar</p>
         </div>
       </div>
     </template>
@@ -87,10 +64,6 @@ const createAccount = (accountBody: User): void => {
 @use "/src/styles/breakpoints.scss" as breakpoints;
 
 .container-register {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   &__out {
     display: none;
   }
@@ -188,11 +161,6 @@ const createAccount = (accountBody: User): void => {
 
 @include breakpoints.from1024 {
   .container-register {
-    min-width: 95rem;
-    height: 60rem;
-    border: 0.3rem rgb(239, 238, 238) solid;
-    border-radius: 3rem;
-
     &__out {
       min-width: 40%;
       height: 100%;
@@ -203,6 +171,7 @@ const createAccount = (accountBody: User): void => {
     &--content {
       display: flex;
       flex-direction: column;
+
       color: colors.$lightGray;
       margin: 8rem 10rem auto 10rem;
     }
