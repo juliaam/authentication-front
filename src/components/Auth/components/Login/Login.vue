@@ -1,8 +1,15 @@
 <script setup lang="ts">
 import MainContent from "../../../MainContent/MainContent.vue";
+import InputText from "../../../InputText/InputText.vue";
+import Card from "../Card.vue";
+
 import keyIcon from "../../img/keyIcon.svg";
 import loginIllustration from "../../img/loginIllustration.svg";
 import googleIcon from "../../img/googleIcon.svg";
+
+const redirectToRegister = (): void => {
+  window.location.pathname = "/register";
+};
 </script>
 
 <template>
@@ -27,20 +34,20 @@ import googleIcon from "../../img/googleIcon.svg";
           />
         </div>
         <div class="container-register__input-group">
-          <Input
+          <InputText
             label="Nome"
             placeholder="Nome"
             style="margin-top: 1rem"
             id="name"
           />
-          <Input
+          <InputText
             label="Email"
             placeholder="Email"
             style="margin-top: 1rem"
             id="email"
           />
 
-          <Input
+          <InputText
             label="Senha"
             placeholder="Senha"
             style="margin-top: 1rem"
@@ -51,7 +58,12 @@ import googleIcon from "../../img/googleIcon.svg";
         <button class="container-register__button">Entrar</button>
         <div class="container-register__bottom">
           <p class="container-register__text">Não possui uma conta?</p>
-          <p class="container-register__text--clickable">Criar</p>
+          <p
+            class="container-register__text--clickable"
+            @click="redirectToRegister"
+          >
+            Criar
+          </p>
         </div>
       </div>
     </template>

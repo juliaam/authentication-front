@@ -24,6 +24,10 @@ const createAccount = (accountBody: User): void => {
   userStore.user = accountBody;
   userStore.register();
 };
+
+const redirectToLogin = (): void => {
+  window.location.pathname = "/login";
+};
 </script>
 
 <template>
@@ -77,7 +81,12 @@ const createAccount = (accountBody: User): void => {
         </button>
         <div class="container-register__bottom">
           <p class="container-register__text">Já tem uma conta?</p>
-          <p class="container-register__text--clickable">Acessar</p>
+          <p
+            class="container-register__text--clickable"
+            @click="redirectToLogin"
+          >
+            Acessar
+          </p>
         </div>
       </div>
     </template>

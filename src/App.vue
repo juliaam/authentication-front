@@ -5,9 +5,10 @@ import Register from "./components/Auth/components/Register/Register.vue";
 import Login from "./components/Auth/components/Login/Login.vue";
 import NotFound from "./components/NotFound/NotFound.vue";
 
-type RoutePaths = "/register" | "/login";
+type RoutePaths = "/" | "/register" | "/login";
 
 const routes: Record<RoutePaths, any> = {
+  "/": Login,
   "/register": Register,
   "/login": Login,
 };
