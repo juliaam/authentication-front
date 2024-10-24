@@ -101,6 +101,7 @@ const handleInput = (event: Event) => {
     color: colors.$darkGray;
     font-weight: 700;
   }
+
   padding-bottom: 6px;
   font-weight: 500;
   border-width: 3px;

@@ -2,11 +2,12 @@
 import google from "./img/googleIcon.svg";
 import loginIllustration from "./img/loginIllustration.svg";
 import icon from "./img/keyIcon.svg";
-import Card from "./Card.vue";
-import Input from "../InputText.vue";
+import Card from "./components/Card.vue";
+import Input from "../InputText/InputText.vue";
 import { ref } from "vue";
 import { User } from "../../types/User";
 import { useUserStore } from "../../stores/user";
+import MainContent from "../MainContent/MainContent.vue";
 
 const userStore = useUserStore();
 
@@ -23,16 +24,16 @@ const createAccount = (accountBody: User): void => {
 </script>
 
 <template>
-  <div class="container-register">
-    <div class="container-register__out">
+  <MainContent>
+    <template #register-out>
       <img :src="icon" class="container-register__img-key" alt="key icon" />
       <img
         :src="loginIllustration"
         class="container-register__img-illustration"
         alt="login illustration"
       />
-    </div>
-    <div class="container-register__in">
+    </template>
+    <template #register-in>
       <div class="container-register__in--content">
         <h2 class="container-register__title">Criar conta</h2>
         <div class="container-register__card-group">
@@ -76,8 +77,8 @@ const createAccount = (accountBody: User): void => {
           <p class="container-register__text--clickable">Acessar</p>
         </div>
       </div>
-    </div>
-  </div>
+    </template>
+  </MainContent>
 </template>
 
 <style lang="scss">
@@ -89,7 +90,6 @@ const createAccount = (accountBody: User): void => {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 
   &__out {
     display: none;

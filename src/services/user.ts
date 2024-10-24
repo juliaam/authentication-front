@@ -4,7 +4,7 @@ import { User } from "../types/User";
 export class UserService {
   private static apiUrl = "https://localhost:3000/api/users";
 
-  static async register(body: User) {
+  static async register(body: User): Promise<User[]> {
     return await axios.post(`${this.apiUrl}/register`, body);
   }
 }
